@@ -12,7 +12,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::resolver(function ($translator, array $data, array $rules, array $messages, array $customAttributes) {
+            return new \App\Validator($translator, $data, $rules, $messages, $customAttributes);
+        });
     }
 
     /**
@@ -20,8 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Validator::resolve(function (array $data, array $rules, array $messages, array $customAttributes) {
-            return new \App\Validator($this->translator, $data, $rules, $messages, $customAttributes);
-        });
+        //
     }
 }

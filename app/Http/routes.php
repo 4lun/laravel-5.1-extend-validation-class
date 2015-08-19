@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
+    dd(\Validator::make([], [
+        'name' => 'required|max:255',
+    ])->getValidationMessages());
+
     return view('welcome');
 });
