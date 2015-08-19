@@ -2,14 +2,13 @@
 
 namespace App\Providers;
 
+use Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -18,11 +17,11 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register()
     {
-        //
+        Validator::resolve(function (array $data, array $rules, array $messages, array $customAttributes) {
+            return new \App\Validator($this->translator, $data, $rules, $messages, $customAttributes);
+        });
     }
 }
